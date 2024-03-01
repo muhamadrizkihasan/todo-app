@@ -77,7 +77,8 @@ class TodoController extends Controller
      */
     public function create()
     {
-        //
+        // Menampilkan halaman input form tambah data
+        return view('todos.create');
     }
 
     /**
