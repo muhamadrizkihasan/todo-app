@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="container my-5 d-flex justify-content-center align-items-center">
-        <form method="POST" action="{{ route('register.createAccount') }}" class="card py-4 px-4">
+        <form method="POST" action="{{ route('register.registerAccount') }}" class="card py-4 px-4">
             @csrf
             @if ($errors->any())
                 <div class="alert alert-danger">

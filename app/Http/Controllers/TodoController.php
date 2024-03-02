@@ -126,9 +126,14 @@ class TodoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Todo $todo)
+    public function edit($id)
     {
-        //
+        // Parameter $id mengambil data path dinamis {id}
+        // Ambil satu baris data yang memiliki value column id sama dengan data path dinamis id yang dikirim ke route
+        $todo = Todo::where('id', $id)->first();
+
+        // Kemudian arahkan / tampilkan file view yang bernama edit.blade.php dan kirim data dari $todo ke file edit tersebut dengan bantuan compact
+        return view('dashboard.edit', compact('todo'));
     }
 
     /**
