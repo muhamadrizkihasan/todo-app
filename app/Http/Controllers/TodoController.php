@@ -139,9 +139,26 @@ class TodoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Todo $todo)
+    public function update(Request $request, $id)
     {
-        //
+        // Validasi
+        $request->validate([
+            'title' => 'required|min:3',
+            'date' => 'required',
+            'description' => 'required|min:8',
+        ]);
+
+        // Cari baris data yang punya value column id sama dengan id yang dikirim ke route
+        Todo::where('id', $id)->update([
+            'title' => $request->title,
+            'date' => $request->date,
+            'description' => $request->description,
+            'user_id' => Auth::user()->id,
+            'status' => 0,
+        ]);
+
+        // Kalau berhasil, arahkan ke halaman data dengan pemberitahuan berhasil
+        return redirect()->route('todo.index')->with('successUpdate', 'Berhasil mengubah data!');
     }
 
     /**

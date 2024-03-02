@@ -29,4 +29,6 @@ Route::middleware('isLogin')->prefix('/todo')->name('todo.')->group(function () 
     Route::post('/store', [TodoController::class, 'store'])->name('store');
     // Parh yang ada {} artinya path dinamis. path dinamis merupakan path yang datanya diisi dari database. path dinamis ini nantinya akan berubah ubah tergantung data yang diberikan. apabila dalam route-nya ada path dinamis maka nantinya data path dinamis ini dapat diakses oleh controller melalui parameter di function nya
     Route::get('/edit/{id}', [TodoController::class, 'edit'])->name('edit');
+    // Method route buat update data ke database itu pake patch/put
+    Route::patch('/update/{id}', [TodoController::class, 'update'])->name('update');
 });
