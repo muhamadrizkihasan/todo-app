@@ -24,8 +24,8 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a href="" class="nav-link">Data</a>
-                        <a href="" class="nav-link">Create</a>
+                        <a href="{{ route('todo.index') }}" class="nav-link">Data</a>
+                        <a href="{{ route('todo.create') }}" class="nav-link">Create</a>
                         <a href="/logout" class="nav-link">Logout</a>
                     </div>
                 </div>

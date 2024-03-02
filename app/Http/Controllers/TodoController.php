@@ -69,7 +69,11 @@ class TodoController extends Controller
      */
     public function index()
     {
-        return view('todos.index');
+        // Ambil data pada table todos melalui model Todo
+        // Data yang diambil merupakan data yang telah di filter berdasarkan user_id (data yang berhasil diambil merupakan data todo yang dibuat oleh id yang sama dengan id user yang loginnya
+        $todos = Todo::where('user_id', '=', Auth::user()->id)->get();
+
+        return view('todos.index', compact('todos'));
     }
 
     /**
@@ -86,7 +90,29 @@ class TodoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validasi form
+        $request->validate([
+            'title' => 'required|min:3',
+            'date' => 'required',
+            'description' => 'required|min:3'
+        ]);
+
+        // Kirim data ke database yang table todos : model Todo
+        // Yang ' ' = nama column
+        // Yang $request-> = value name di input
+        // Kenapa kirim 5 data padahal di input ada 3 inputan? Kalau dicek di table todos itu kan ada 6 column yang harus diisi, salah satunya column done_date yang nullable, kalu nullable itu gausa diisi gpp jadi ga diisi dulu
+        // user_id ngambil id dari fitur auth (history login), supaya tau itu todo punya siapa
+        // Colomn status kan boolean, jadi kalo status si todo belum dikerjain = 0
+        Todo::create([
+            'title' => $request->title,
+            'date' => $request->date,
+            'description' => $request->description,
+            'user_id' => Auth::user()->id,
+            'status' => 0,
+        ]);
+
+        // Kalau berhasil tambah ke db, bakal diarahin ke halaman dashboard dengan menampilkan pemberitahuan
+        return redirect()->route('todo.index')->with('addTodo', 'Berhasil menambahkan data Todo!');
     }
 
     /**

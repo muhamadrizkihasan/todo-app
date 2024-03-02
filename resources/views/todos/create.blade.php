@@ -3,6 +3,17 @@
 @section('content')
 
     <form action="{{route('todo.store')}}" method="post" style="max-width: 500px; margin: auto;">
+        {{-- Menampilkan alert ketika validasi menghasilkan error --}}
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         {{-- mengirim data ke controller yg ditampung oleh Request $request --}}
         @csrf
         <div class="d-flex flex-column">

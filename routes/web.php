@@ -25,4 +25,6 @@ Route::get('/logout', [TodoController::class, 'logout'])->name('logout');
 
 Route::middleware('isLogin')->prefix('/todo')->name('todo.')->group(function () {
     Route::get('/', [TodoController::class, 'index'])->name('index');
+    Route::get('/create', [TodoController::class, 'create'])->name('create');
+    Route::post('/store', [TodoController::class, 'store'])->name('store');
 });
