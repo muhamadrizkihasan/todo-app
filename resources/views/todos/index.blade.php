@@ -16,6 +16,11 @@
             {{ Session::get('addTodo') }}
         </div>
     @endif
+    @if (Session::get('done'))
+        <div class="alert alert-success">
+            {{ Session::get('done') }}
+        </div>
+    @endif
     <div class="container mt-5">
         <table class="table table-success table-striped table-bordered">
             <tr>

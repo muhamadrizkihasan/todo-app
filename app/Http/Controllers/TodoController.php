@@ -172,4 +172,16 @@ class TodoController extends Controller
         // Kalau berhasil arahin balik ke halaman data dengan pemberitahuan
         return redirect()->route('todo.index')->with('successDelete', 'Berhasil menghapus data Todo!');
     }
+
+    public function updateToComplated($id)
+    {
+        // Cari data yang akan diupdate
+        // Baru setelahnya data di update ke database melalui model
+        Todo::where('id', '=', $id)->update([
+            'status' => 1,
+            'done_time' => \Carbon\Carbon::now(),
+        ]);
+
+        return redirect()->back()->with('done', 'ToDo telah selesai dikerjakan!');
+    }
 }
