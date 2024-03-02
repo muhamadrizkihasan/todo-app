@@ -31,4 +31,6 @@ Route::middleware('isLogin')->prefix('/todo')->name('todo.')->group(function () 
     Route::get('/edit/{id}', [TodoController::class, 'edit'])->name('edit');
     // Method route buat update data ke database itu pake patch/put
     Route::patch('/update/{id}', [TodoController::class, 'update'])->name('update');
+    // Method route buat delete data di database itu pake delete
+    Route::delete('/destroy/{id}', [TodoController::class, 'destroy'])->name('destroy');
 });

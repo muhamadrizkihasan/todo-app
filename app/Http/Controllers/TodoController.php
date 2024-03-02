@@ -164,8 +164,12 @@ class TodoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Todo $todo)
+    public function destroy($id)
     {
-        //
+        // Cari data yang mau dihapus, kalo ketemu langsung hapus datanya 
+        Todo::where('id', $id)->delete();
+
+        // Kalau berhasil arahin balik ke halaman data dengan pemberitahuan
+        return redirect()->route('todo.index')->with('successDelete', 'Berhasil menghapus data Todo!');
     }
 }
